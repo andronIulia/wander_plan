@@ -58,6 +58,21 @@
 }
 .nav-user-btn:hover { background: var(--mist); color: var(--ocean); }
 
+.logout-modal {
+  max-width: 360px;
+  text-align: center;
+  padding: 40px 32px;
+}
+.logout-icon { font-size: 2.5rem; margin-bottom: 12px; }
+.logout-modal h2 {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  color: var(--ocean);
+  margin-bottom: 8px;
+}
+.logout-modal p { color: var(--subtext); font-size: 0.95rem; margin-bottom: 28px; }
+.logout-actions { display: flex; gap: 12px; justify-content: center; }
+
 .hamburger {
   display: none;
   background: none;

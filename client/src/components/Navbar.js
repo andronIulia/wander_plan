@@ -10,17 +10,23 @@ const Navbar = () => {
   const location = useLocation();
   const [menuOpen, setMenuOpen] = useState(false);
   const [showProfile, setShowProfile] = useState(false);
+  const [showLogoutConfirm, setShowLogoutConfirm] = useState(false);
 
-  const handleLogout = () => {
-    logout();
-    navigate('/');
+  const handleLogoutClick = () => {
     setMenuOpen(false);
+    setShowLogoutConfirm(true);
   };
 
-  // Hide navbar on landing page when not logged in
+ const handleLogoutConfirm = () => {
+    logout();
+    setShowLogoutConfirm(false);
+    navigate('/');
+  };
+
   if (!user && location.pathname === '/') return null;
 
   return (
+    <>
     <header className="navbar">
       <div className="container navbar-inner">
         <Link to={user ? '/dashboard' : '/'} className="navbar-brand">
@@ -38,7 +44,7 @@ const Navbar = () => {
               <button className="nav-user nav-user-btn" onClick={() => setShowProfile(true)}>
                 👋 {user.name.split(' ')[0]}
               </button>
-              <button className="btn btn-ghost btn-sm" onClick={handleLogout}>
+              <button className="btn btn-ghost btn-sm" onClick={handleLogoutClick}>
                 Sign out
               </button>
             </nav>
@@ -57,8 +63,27 @@ const Navbar = () => {
           </nav>
         )}
       </div>
-      {showProfile && <Profile onClose={() => setShowProfile(false)} />}
+      
     </header>
+    {showProfile && <Profile onClose={() => setShowProfile(false)} />}
+    {showLogoutConfirm && (
+        <div className="modal-overlay" onClick={() => setShowLogoutConfirm(false)}>
+          <div className="modal logout-modal" onClick={(e) => e.stopPropagation()}>
+            <div className="logout-icon">👋</div>
+            <h2>Sign out?</h2>
+            <p>Are you sure you want to sign out of WanderPlan?</p>
+            <div className="logout-actions">
+              <button className="btn btn-ghost" onClick={() => setShowLogoutConfirm(false)}>
+                Cancel
+              </button>
+              <button className="btn btn-coral" onClick={handleLogoutConfirm}>
+                Yes, sign out
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+    </>
   );
 };
 

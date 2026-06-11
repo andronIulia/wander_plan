@@ -14,6 +14,10 @@ const Register = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+     if (form.password !== form.confirmPassword) {
+      toast.error('Passwords do not match');
+      return;
+    }
     setLoading(true);
     try {
       await register(form.name, form.email, form.password);
@@ -77,6 +81,26 @@ const Register = () => {
               minLength={6}
               autoComplete="new-password"
             />
+          </div>
+
+           <div className="form-group">
+            <label htmlFor="confirmPassword">Confirm password</label>
+            <input
+              id="confirmPassword"
+              name="confirmPassword"
+              type="password"
+              value={form.confirmPassword}
+              onChange={handleChange}
+              placeholder="Repeat your password"
+              required
+              autoComplete="new-password"
+            />
+            {form.confirmPassword && form.password !== form.confirmPassword && (
+              <span className="field-error">Passwords do not match</span>
+            )}
+            {form.confirmPassword && form.password === form.confirmPassword && (
+              <span className="field-success">✓ Passwords match</span>
+            )}
           </div>
 
           <button
