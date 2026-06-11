@@ -1,0 +1,57 @@
+.dashboard { padding-bottom: 60px; }
+
+.dashboard-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.filter-tabs {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 28px;
+  flex-wrap: wrap;
+}
+.filter-tab {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 14px;
+  border: 1.5px solid var(--border);
+  border-radius: 999px;
+  background: var(--white);
+  color: var(--subtext);
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all var(--transition);
+}
+.filter-tab:hover { border-color: var(--ocean); color: var(--ocean); }
+.filter-tab.active {
+  background: var(--ocean);
+  border-color: var(--ocean);
+  color: var(--white);
+}
+.filter-count {
+  background: rgba(255,255,255,0.25);
+  border-radius: 999px;
+  padding: 1px 7px;
+  font-size: 0.75rem;
+}
+.filter-tab:not(.active) .filter-count {
+  background: var(--mist);
+  color: var(--subtext);
+}
+
+.trips-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 20px;
+}
+
+@media (max-width: 640px) {
+  .dashboard-header { flex-direction: column; align-items: flex-start; }
+  .trips-grid { grid-template-columns: 1fr; }
+}
