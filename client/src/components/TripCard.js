@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { format } from 'date-fns';
+import WeatherWidget from './WeatherWidget';
 import './TripCard.css';
 
 const DESTINATION_EMOJIS = {
@@ -35,6 +36,7 @@ const TripCard = ({ trip, onDelete }) => {
           {trip.description && <p className="tc-desc">{trip.description}</p>}
         </div>
       </Link>
+      <WeatherWidget destination={trip.destination} startDate={trip.startDate} />
       <div className="tc-footer">
         <span className={`badge badge-${trip.status}`}>{trip.status}</span>
         <div className="tc-actions">
